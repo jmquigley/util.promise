@@ -1,6 +1,6 @@
 {
   "name": "util.promise",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "jmquigley <jmquigley@outlook.com>",
   "description": "Utility functions for handling promises",
   "private": false,
