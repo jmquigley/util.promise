@@ -31,6 +31,7 @@ test('Test pending promise state', t => {
 	t.true(promise instanceof Promise);
 	t.true(state instanceof PromiseState);
 	t.true(state.isPending());
+	t.is(state.toString(), 'pending');
 });
 
 test('Test rejected promise state', t => {
@@ -40,6 +41,7 @@ test('Test rejected promise state', t => {
 	t.true(promise instanceof Promise);
 	t.true(state instanceof PromiseState);
 	t.pass(state.isRejected());
+	t.is(state.toString(), 'rejected');
 
 	promise.catch(err => {
 		t.pass(err);
@@ -53,6 +55,7 @@ test('Test resolved promise state', t => {
 	t.true(promise instanceof Promise);
 	t.true(state instanceof PromiseState);
 	t.pass(state.isResolved());
+	t.is(state.toString(), 'resolved');
 
 	promise
 		.then(ret => {

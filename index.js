@@ -30,6 +30,19 @@ class PromiseState {
 	isComplete() {
 		return (this.isRejected() || this.isResolved());
 	}
+
+	toString() {
+		let s = 'unknown';
+		if (this.isPending()) {
+			s = 'pending';
+		} else if (this.isRejected()) {
+			s = 'rejected';
+		} else if (this.isResolved()) {
+			s = 'resolved';
+		}
+
+		return s;
+	}
 }
 
 module.exports = PromiseState;
