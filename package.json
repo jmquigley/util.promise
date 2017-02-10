@@ -20,7 +20,6 @@
     "fs-extra": "^2.0.0",
     "lodash": "^4.17.4",
     "object-assign": "^4.1.1",
-    "randombytes": "^2.0.3",
     "util.fixture": "0.0.18",
     "util.rstrip": "0.0.7",
     "uuid": "^3.0.1",
