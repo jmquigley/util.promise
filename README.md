@@ -1,2 +1,3 @@
 # util.promise
-Utility functions for handling promises
+
+> Utility functions for handling promises
