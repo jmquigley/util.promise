@@ -1,4 +1,4 @@
-# util.promise
+# util.promise [![Build Status](https://travis-ci.org/jmquigley/util.promise.svg?branch=master)](https://travis-ci.org/jmquigley/util.promise) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo) [![NPM](https://img.shields.io/npm/v/util.promise.svg)](https://www.npmjs.com/package/util.promise) [![Coverage Status](https://coveralls.io/repos/github/jmquigley/util.promise/badge.svg?branch=master)](https://coveralls.io/github/jmquigley/util.promise?branch=master) 
 
 > Utility functions for handling promises
 
