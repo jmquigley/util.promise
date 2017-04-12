@@ -15,29 +15,23 @@
   "engines": {
     "node": ">=7.4"
   },
-  "dependencies": {
-    "expand-home-dir": "0.0.3",
-    "fs-extra": "^2.0.0",
-    "lodash": "^4.17.4",
-    "object-assign": "^4.1.1",
-    "util.fixture": "0.0.18",
-    "util.rstrip": "0.0.7",
-    "uuid": "^3.0.1",
-    "yargs": "^6.5.0"
-  },
   "devDependencies": {
-    "ava": "^0.18.1",
-    "coveralls": "^2.11.15",
-    "nyc": "^10.1.2",
-    "util.pkgwrap": "0.0.5",
-    "xo": "^0.17.1"
+    "ava": "^0.19.1",
+    "coveralls": "^2.13.0",
+    "fs-extra": "^2.1.2",
+    "nyc": "^10.2.0",
+    "util.fixture": "0.0.47",
+    "util.pkgwrap": "0.0.21",
+    "xo": "^0.18.1"
   },
   "main": "index.js",
   "scripts": {
-    "postinstall": "pkgwrap --postinstall",
-    "test": "pkgwrap --testing",
-    "report": "pkgwrap --reporting",
-    "coverage": "pkgwrap --coverage"
+    "all": "npm install && npm run lint && npm test && npm run report",
+    "coverage": "./node_modules/.bin/pkgwrap --coverage",
+    "lint": "./node_modules/.bin/xo",
+    "postinstall": "./node_modules/.bin/pkgwrap --postinstall",
+    "report": "./node_modules/.bin/pkgwrap --reporting",
+    "test": "./node_modules/.bin/pkgwrap --testing --ava"
   },
   "xo": {
     "env": {
@@ -60,7 +54,9 @@
       "arrow-parens": [
         "error",
         "as-needed"
-      ]
+      ],
+      "prefer-promise-reject-errors": "off",
+      "capitalized-comments": "off"
     }
   }
 }

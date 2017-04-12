@@ -1,22 +1,29 @@
 'use strict';
 
 import test from 'ava';
+import {Fixture} from 'util.fixture';
 
 const fs = require('fs-extra');
-const Fixture = require('util.fixture');
 const PromiseState = require('./index');
 
-test.after.always(t => {
-	let directories = Fixture.cleanup();
-	directories.forEach(directory => {
-		t.false(fs.existsSync(directory));
+test.after.always.cb(t => {
+	Fixture.cleanup((err, directories) => {
+		if (err) {
+			return t.fail(`Failure cleaning up after test: ${err.message}`);
+		}
+
+		directories.forEach(directory => {
+			t.false(fs.existsSync(directory));
+		});
+
+		t.end();
 	});
 });
 
 test('Test a bad promise creation exception', t => {
 	try {
-		let a = [];
-		let state = new PromiseState(a);
+		const a = [];
+		const state = new PromiseState(a);
 		state.toString();
 	} catch (err) {
 		t.pass(err.message);
@@ -24,9 +31,9 @@ test('Test a bad promise creation exception', t => {
 });
 
 test('Test pending promise state', t => {
-	let promise = new Promise(() => {
+	const promise = new Promise(() => {
 	});
-	let state = new PromiseState(promise);
+	const state = new PromiseState(promise);
 
 	t.true(promise instanceof Promise);
 	t.true(state instanceof PromiseState);
@@ -35,12 +42,12 @@ test('Test pending promise state', t => {
 });
 
 test('Test rejected promise state', t => {
-	let promise = Promise.reject('nothing to see');
-	let state = new PromiseState(promise);
+	const promise = Promise.reject('nothing to see');
+	const state = new PromiseState(promise);
 
 	t.true(promise instanceof Promise);
 	t.true(state instanceof PromiseState);
-	t.pass(state.isRejected());
+	t.true(state.isRejected());
 	t.is(state.toString(), 'rejected');
 
 	promise.catch(err => {
@@ -49,8 +56,8 @@ test('Test rejected promise state', t => {
 });
 
 test('Test resolved promise state', t => {
-	let promise = Promise.resolve('finished state');
-	let state = new PromiseState(promise);
+	const promise = Promise.resolve('finished state');
+	const state = new PromiseState(promise);
 
 	t.true(promise instanceof Promise);
 	t.true(state instanceof PromiseState);
@@ -67,8 +74,8 @@ test('Test resolved promise state', t => {
 });
 
 test('Test complete promise state', t => {
-	let promise = Promise.resolve('complete state');
-	let state = new PromiseState(promise);
+	const promise = Promise.resolve('complete state');
+	const state = new PromiseState(promise);
 
 	t.true(promise instanceof Promise);
 	t.true(state instanceof PromiseState);
