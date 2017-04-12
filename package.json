@@ -13,50 +13,29 @@
     "url": "https://github.com/jmquigley/util.promise/issues"
   },
   "engines": {
-    "node": ">=7.4"
+    "node": ">=7.5"
   },
   "devDependencies": {
+    "@types/fs-extra": "2.0.0",
+    "@types/node": "^7.0.12",
     "ava": "^0.19.1",
     "coveralls": "^2.13.0",
     "fs-extra": "^2.1.2",
     "nyc": "^10.2.0",
+    "tslint": "^5.1.0",
+    "typescript": "^2.2.2",
     "util.fixture": "0.0.47",
-    "util.pkgwrap": "0.0.21",
-    "xo": "^0.18.1"
+    "util.pkgwrap": "0.0.21"
   },
   "main": "index.js",
+  "types": "./index.d.ts",
   "scripts": {
-    "all": "npm install && npm run lint && npm test && npm run report",
+    "all": "npm install && npm run lint && npm run build && npm test && npm run report",
+    "build": "./node_modules/.bin/pkgwrap --build",
     "coverage": "./node_modules/.bin/pkgwrap --coverage",
-    "lint": "./node_modules/.bin/xo",
+    "lint": "./node_modules/.bin/pkgwrap --lint",
     "postinstall": "./node_modules/.bin/pkgwrap --postinstall",
     "report": "./node_modules/.bin/pkgwrap --reporting",
     "test": "./node_modules/.bin/pkgwrap --testing --ava"
-  },
-  "xo": {
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    },
-    "global": [
-      "window",
-      "JSON"
-    ],
-    "rules": {
-      "space-before-function-paren": "off",
-      "unicorn/filename-case": [
-        "error",
-        {
-          "case": "snakeCase"
-        }
-      ],
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ],
-      "prefer-promise-reject-errors": "off",
-      "capitalized-comments": "off"
-    }
   }
 }

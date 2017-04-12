@@ -1,13 +1,19 @@
 'use strict';
 
-const util = require('util');
+import * as util from 'util';
 
 const REJECTED = new RegExp(/^Promise { <rejected> .*$/);
 const PENDING = new RegExp(/^Promise { <pending> }/);
 
+export type IResolveFn = (val?: any) => Promise<any>;
+export type IRejectFn = (val?: any) => Promise<any>;
+
 /** Takes a promise object and computes the current state */
-class PromiseState {
-	constructor(promise) {
+export class PromiseState {
+
+	private promise: Promise<any>;
+
+	constructor(promise: Promise<any>) {
 		if (promise && promise instanceof Promise) {
 			this.promise = promise;
 		} else {
@@ -15,23 +21,23 @@ class PromiseState {
 		}
 	}
 
-	isPending() {
+	public isPending() {
 		return PENDING.test(util.inspect(this.promise));
 	}
 
-	isRejected() {
+	public isRejected() {
 		return REJECTED.test(util.inspect(this.promise));
 	}
 
-	isResolved() {
+	public isResolved() {
 		return (!this.isPending() && !this.isRejected());
 	}
 
-	isComplete() {
+	public isComplete() {
 		return (this.isRejected() || this.isResolved());
 	}
 
-	toString() {
+	public toString() {
 		let s = 'unknown';
 		if (this.isPending()) {
 			s = 'pending';
@@ -44,5 +50,3 @@ class PromiseState {
 		return s;
 	}
 }
-
-module.exports = PromiseState;
