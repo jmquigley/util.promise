@@ -27,7 +27,7 @@
     "nyc": "^10.2.0",
     "tslint": "^5.1.0",
     "typescript": "^2.2.2",
-    "util.fixture": "0.0.48"
+    "util.fixture": "0.0.50"
   },
   "main": "index.js",
   "types": "./index.d.ts",
