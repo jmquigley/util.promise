@@ -8,14 +8,16 @@ by using [Node inspect](https://nodejs.org/api/util.html#util_util_inspect_objec
 
 ## Installation
 
+This module uses [yarn](https://yarnpkg.com/en/) to manage dependencies and run scripts for development.
+
 To install as an application dependency with cli:
 ```
-$ npm install --save-dev util.promise
+$ yarn add --dev util.promise
 ```
 
 To build the app and run all tests:
 ```
-$ npm run all
+$ yarn run all
 ```
 
 
