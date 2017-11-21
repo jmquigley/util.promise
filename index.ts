@@ -5,8 +5,8 @@ import * as util from 'util';
 const REJECTED = new RegExp(/^Promise { <rejected> .*$/);
 const PENDING = new RegExp(/^Promise { <pending> }/);
 
-export type IResolveFn = (val?: any) => Promise<any> | void;
-export type IRejectFn = (val?: any) => Promise<any> | void;
+export type ResolveFn<T> = (val?: T) => Promise<T> | void;
+export type RejectFn<T> = (val?: T) => Promise<T> | void;
 
 /** Takes a promise object and computes the current state */
 export class PromiseState {

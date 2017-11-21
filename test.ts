@@ -1,9 +1,10 @@
 'use strict';
 
+import * as assert from 'assert';
 import test from 'ava';
 import * as fs from 'fs-extra';
 import {Fixture} from 'util.fixture';
-import {PromiseState} from './index';
+import {PromiseState, RejectFn, ResolveFn} from './index';
 
 test.after.always.cb(t => {
 	Fixture.cleanup((err: Error, directories: string[]) => {
@@ -87,4 +88,14 @@ test('Test complete promise state', t => {
 		.catch(err => {
 			t.fail(`${t.context.title}: ${err}`);
 		});
+});
+
+test('Test the promise function types', t => {
+	return new Promise((resolve: ResolveFn<string>, reject: RejectFn<string>) => {
+		assert(resolve);
+		assert(reject);
+		t.pass();
+
+		resolve('successful test');
+	});
 });

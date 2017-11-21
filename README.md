@@ -5,6 +5,8 @@
 A class that will take a promise object and derive its current state
 by using [Node inspect](https://nodejs.org/api/util.html#util_util_inspect_object_options).  It's used for debugging/testing with promises to see the state of a promise.
 
+It also provides two typescript function signatures: `ResolveFn` and `RejectFn`.  This can be used with promise creation to give return type information for the resolve/reject calls.
+
 
 ## Installation
 
@@ -12,7 +14,7 @@ This module uses [yarn](https://yarnpkg.com/en/) to manage dependencies and run 
 
 To install as an application dependency with cli:
 ```
-$ yarn add --dev util.promise
+$ yarn add util.promise
 ```
 
 To build the app and run all tests:
@@ -22,6 +24,8 @@ $ yarn run all
 
 
 ## Usage
+
+#### Check the state of a Promise
 ```
 let promise = Promise.resolve('finished state');
 let state = new PromiseState(promise);
@@ -31,13 +35,28 @@ t.true(state instanceof PromiseState);
 t.pass(state.isResolved());
 
 promise
-	.then(ret => {
-		t.pass(ret);
-	})
-	.catch(err => {
-		t.fail(`${t.context.title}: ${err}`);
-	});
+    .then(ret => {
+        t.pass(ret);
+    })
+    .catch(err => {
+        t.fail(`${t.context.title}: ${err}`);
+    });
 ```
+
+#### Using types in Promise resolution
+```javascript
+    ...
+    return new Promise((resolve: ResolveFn<string>, reject: RejectFn<string>) => {
+        assert(resolve);
+        assert(reject);
+        t.pass();
+
+        resolve('successful test');
+    });
+```
+
+In this snippet both functions will resolve/reject with strings.
+
 
 ## API
 
@@ -49,5 +68,5 @@ promise
 
 This also exposes two typescript interface definitions for the resolve/reject functions:
 
-- `IResolveFn` - a function signature for the resolve function
-- `IRejectFn` - a function signature for the reject function
+- `ResolveFn<T>` - a function signature for the resolve function.
+- `RejectFn<T>` - a function signature for the reject function
