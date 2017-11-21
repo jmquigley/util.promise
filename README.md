@@ -68,5 +68,6 @@ In this snippet both functions will resolve/reject with strings.
 
 This also exposes two typescript interface definitions for the resolve/reject functions:
 
+- `PromiseFn<T>` - function signature for either a resolve/reject function in a promise.
 - `ResolveFn<T>` - a function signature for the resolve function.
 - `RejectFn<T>` - a function signature for the reject function
