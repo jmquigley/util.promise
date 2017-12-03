@@ -3,6 +3,8 @@
   "version": "0.0.17",
   "author": "jmquigley <jmquigley@outlook.com>",
   "description": "Utility functions for handling promises",
+  "main": "index.js",
+  "types": "./index.d.ts",
   "private": false,
   "license": "MIT",
   "repository": {
@@ -13,10 +15,7 @@
     "url": "https://github.com/jmquigley/util.promise/issues"
   },
   "engines": {
-    "node": ">=7.5"
-  },
-  "dependencies": {
-    "util.pkgwrap": "0.0.73"
+    "node": ">=7.x"
   },
   "devDependencies": {
     "@types/fs-extra": "4.0.5",
@@ -29,15 +28,14 @@
     "typescript": "^2.6.1",
     "util.fixture": "0.0.59"
   },
-  "main": "index.js",
-  "types": "./index.d.ts",
   "scripts": {
-    "all": "yarn install && yarn run clean && yarn run lint && yarn run build && yarn test && yarn run report",
-    "build": "pkgwrap --build",
+    "all": "yarn install && yarn run build && yarn test && yarn run report",
+    "build": "yarn run clean && yarn run lint && pkgwrap --build",
     "clean": "pkgwrap --clean",
     "coverage": "pkgwrap --coverage",
     "lint": "pkgwrap --lint",
-    "postinstall": "pkgwrap --postinstall",
+    "preinstall": "yarn global add util.pkgwrap",
+    "prepublishOnly": "yarn run all",
     "report": "pkgwrap --reporting",
     "test": "pkgwrap --testing --ava"
   }
