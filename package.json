@@ -25,8 +25,8 @@
     "fs-extra": "^5.0.0",
     "nyc": "^11.7.1",
     "tslint": "^5.9.1",
-    "typescript": "^2.8.1",
-    "util.fixture": "0.0.62",
+    "typescript": "^2.8.3",
+    "util.fixture": "0.0.63",
     "util.pkgwrap": "^0.0.91"
   },
   "scripts": {
