@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-import * as util from 'util';
+import * as util from "util";
 
 const REJECTED = new RegExp(/^Promise { <rejected> .*$/);
 const PENDING = new RegExp(/^Promise { <pending> }/);
@@ -11,7 +11,6 @@ export type RejectFn<T> = PromiseFn<T>;
 
 /** Takes a promise object and computes the current state */
 export class PromiseState {
-
 	private promise: Promise<any>;
 
 	constructor(promise: Promise<any>) {
@@ -31,21 +30,21 @@ export class PromiseState {
 	}
 
 	public isResolved() {
-		return (!this.isPending() && !this.isRejected());
+		return !this.isPending() && !this.isRejected();
 	}
 
 	public isComplete() {
-		return (this.isRejected() || this.isResolved());
+		return this.isRejected() || this.isResolved();
 	}
 
 	public toString() {
-		let s = 'unknown';
+		let s = "unknown";
 		if (this.isPending()) {
-			s = 'pending';
+			s = "pending";
 		} else if (this.isRejected()) {
-			s = 'rejected';
+			s = "rejected";
 		} else if (this.isResolved()) {
-			s = 'resolved';
+			s = "resolved";
 		}
 
 		return s;

@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-import * as fs from 'fs-extra';
-import {Fixture} from 'util.fixture';
-import {PromiseState, RejectFn, ResolveFn} from '../index';
+import * as fs from "fs-extra";
+import {Fixture} from "util.fixture";
+import {PromiseState, RejectFn, ResolveFn} from "../index";
 
 afterAll((done) => {
 	Fixture.cleanup((err: Error, directories: string[]) => {
@@ -18,7 +18,7 @@ afterAll((done) => {
 	});
 });
 
-test('Test a bad promise creation exception', () => {
+test("Test a bad promise creation exception", () => {
 	expect(() => {
 		const a: any = [];
 		const state = new PromiseState(a);
@@ -26,51 +26,50 @@ test('Test a bad promise creation exception', () => {
 	}).toThrow();
 });
 
-test('Test pending promise state', () => {
-	const promise = new Promise(() => {
-	});
+test("Test pending promise state", () => {
+	const promise = new Promise(() => {});
 	const state = new PromiseState(promise);
 
 	expect(promise instanceof Promise).toBe(true);
 	expect(state instanceof PromiseState).toBe(true);
 	expect(state.isPending()).toBe(true);
-	expect(state.toString()).toBe('pending');
+	expect(state.toString()).toBe("pending");
 });
 
-test('Test rejected promise state', () => {
-	const promise = Promise.reject('nothing to see');
+test("Test rejected promise state", () => {
+	const promise = Promise.reject("nothing to see");
 	const state = new PromiseState(promise);
 
 	expect(promise instanceof Promise).toBe(true);
 	expect(state instanceof PromiseState).toBe(true);
 	expect(state.isRejected()).toBe(true);
-	expect(state.toString()).toBe('rejected');
+	expect(state.toString()).toBe("rejected");
 
-	promise.catch(err => {
+	promise.catch((err) => {
 		expect(err).toBeTruthy();
 	});
 });
 
-test('Test resolved promise state', () => {
-	const promise = Promise.resolve('finished state');
+test("Test resolved promise state", () => {
+	const promise = Promise.resolve("finished state");
 	const state = new PromiseState(promise);
 
 	expect(promise instanceof Promise).toBe(true);
 	expect(state instanceof PromiseState).toBe(true);
 	expect(state.isResolved()).toBe(true);
-	expect(state.toString()).toBe('resolved');
+	expect(state.toString()).toBe("resolved");
 
 	promise
-		.then(ret => {
+		.then((ret) => {
 			expect(ret).toBeTruthy();
 		})
-		.catch(err => {
+		.catch((err) => {
 			throw new Error(`${t.context.title}: ${err}`);
 		});
 });
 
-test('Test complete promise state', () => {
-	const promise = Promise.resolve('complete state');
+test("Test complete promise state", () => {
+	const promise = Promise.resolve("complete state");
 	const state = new PromiseState(promise);
 
 	expect(promise instanceof Promise).toBe(true);
@@ -78,18 +77,20 @@ test('Test complete promise state', () => {
 	expect(state.isComplete()).toBe(true);
 
 	promise
-		.then(ret => {
+		.then((ret) => {
 			expect(ret).toBeTruthy();
 		})
-		.catch(err => {
+		.catch((err) => {
 			throw new Error(`${t.context.title}: ${err}`);
 		});
 });
 
-test('Test the promise function types', () => {
-	return new Promise((resolve: ResolveFn<string>, reject: RejectFn<string>) => {
-		expect(resolve).toBeTruthy();
-		expect(reject).toBeTruthy();
-		resolve('successful test');
-	});
+test("Test the promise function types", () => {
+	return new Promise(
+		(resolve: ResolveFn<string>, reject: RejectFn<string>) => {
+			expect(resolve).toBeTruthy();
+			expect(reject).toBeTruthy();
+			resolve("successful test");
+		}
+	);
 });
