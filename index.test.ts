@@ -1,22 +1,7 @@
 "use strict";
 
 import * as fs from "fs-extra";
-import {Fixture} from "util.fixture";
-import {PromiseState, RejectFn, ResolveFn} from "../index";
-
-afterAll((done) => {
-	Fixture.cleanup((err: Error, directories: string[]) => {
-		if (err) {
-			return t.fail(`Failure cleaning up after test: ${err.message}`);
-		}
-
-		directories.forEach((directory: string) => {
-			throw new Error(fs.existsSync(directory));
-		});
-
-		done();
-	});
-});
+import {PromiseState, RejectFn, ResolveFn} from "./index";
 
 test("Test a bad promise creation exception", () => {
 	expect(() => {
