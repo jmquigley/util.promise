@@ -1,5 +1,3 @@
-"use strict";
-
 import * as util from "util";
 
 const REJECTED = new RegExp(/^Promise { <rejected> .*$/);

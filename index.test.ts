@@ -1,5 +1,3 @@
-"use strict";
-
 import * as fs from "fs-extra";
 import {PromiseState, RejectFn, ResolveFn} from "./index";
 
